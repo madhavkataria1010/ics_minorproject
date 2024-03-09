@@ -39,7 +39,7 @@ This program calculates the dominant eigenvalue of a square matrix using the pow
 
 ## Requirements
 
-- C compiler (e.g., GCC)
+- C compiler
 - Standard C libraries (stdio.h, stdlib.h, math.h, time.h)
 
 ## Example
