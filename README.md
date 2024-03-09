@@ -9,14 +9,21 @@ This program calculates the dominant eigenvalue of a square matrix using the pow
 ## How to Use
 
 1. Clone the repository to your local machine.
-2. Compile the program using a C compiler. For example, using GCC:
+2. Compile the program using a C compiler. For example, using Clang:
 
    ```bash
-   gcc eigenvalue_calculator.c -o eigenvalue_calculator -lm
+   clang eigenvalue_calculator.c -o eigenvalue_calculator
+   ```
+   In case program not working try using 
+   ```bash
+   clang eigenvalue_calculator.c -o eigenvalue_calculator -lm
    ```
 
-   Note: The `-lm` flag is used to link the math library.
-   
+   here 
+   ```bash
+   -lm
+   ```
+   link the math.h library 
 3. Run the compiled program:
 
    ```bash
