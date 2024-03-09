@@ -1,4 +1,4 @@
-Here is a sample README file for the Eigenvalue Calculator project:
+# ICS Minor Project
 
 ---
 
@@ -56,4 +56,3 @@ Dominant Eigenvalue: 1.709209
 
 ---
 
-Feel free to modify and expand this README based on your project's specific requirements and features.
