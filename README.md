@@ -55,4 +55,8 @@ Dominant Eigenvalue: 1.709209
 ```
 
 ---
+## Made by 
+- Madhav Kataria 
+- Roll no - B23CH1025 
+
 
