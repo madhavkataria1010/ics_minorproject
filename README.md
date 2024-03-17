@@ -51,6 +51,10 @@ The code outputs the accuracy of the model on the training dataset for each epoc
 - The `LR_predict` function predicts the class label for a given input using the trained model.
 - The `LR_softmax` function applies the softmax activation function to convert model outputs into class probabilities.
 
+## Data Set 
+The current data set is been extracted from https://archive.ics.uci.edu. The data set is of Multivariate Gait Data and contains Bilateral (left, right) joint angle (ankle, knee, hip) times series data collected from 10 healthy subjects under 3 walking conditions (unbraced, knee braced, ankle braced). For each condition, each subject’s data consists of 10 consecutive gait cycles.
+- Instances = 181800
+
 ## License
 
 This project is licensed under the MIT License - see the `LICENSE` file for details.
