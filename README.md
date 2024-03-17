@@ -14,12 +14,12 @@ This project provides a basic implementation of logistic regression in C. Logist
 
 1. **Compile the code:**
    ```sh
-   gcc Logistic_Regression.c -o Logistic_Regression -lm
+   gcc LogisticRegression.c -o LogisticRegression -lm
    ```
 
 2. **Run the executable:**
    ```sh
-   ./Logistic_Regression
+   ./LogisticRegression
    ```
 
 ## Data Format
