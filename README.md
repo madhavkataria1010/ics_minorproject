@@ -1,65 +1,59 @@
-# ICS Minor Project
 
 ---
 
-# Eigenvalue Calculator
+# Logistic Regression in C
 
-This program calculates the dominant eigenvalue of a square matrix using the power iteration method. It allows the user to either enter a matrix manually or generate a random matrix.
+This project provides a basic implementation of logistic regression in C. Logistic regression is a linear model commonly used for binary classification tasks.
 
-## How to Use
+## Overview
 
-1. Clone the repository to your local machine.
-2. Compile the program using a C compiler. For example, using Clang:
+- `Logistic_Regression.c`: The main C source file containing the implementation of logistic regression.
+- `data.csv`: Sample dataset in CSV format for training the logistic regression model.
 
-   ```bash
-   clang eigenvalue_calculator.c -o eigenvalue_calculator
-   ```
-   In case program not working try using 
-   ```bash
-   clang eigenvalue_calculator.c -o eigenvalue_calculator -lm
-   ```
+## Usage
 
-   here 
-   ```bash
-   -lm
-   ```
-   link the math.h library 
-3. Run the compiled program:
-
-   ```bash
-   ./eigenvalue_calculator
+1. **Compile the code:**
+   ```sh
+   gcc Logistic_Regression.c -o Logistic_Regression -lm
    ```
 
-4. Choose one of the following options:
+2. **Run the executable:**
+   ```sh
+   ./Logistic_Regression
+   ```
 
-   - Enter matrix manually: Enter the number of rows and columns, followed by the elements of the matrix.
-   - Generate random matrix: Enter the number of rows and columns for a randomly generated matrix.
+## Data Format
 
-5. The program will display the entered/generated matrix and calculate the dominant eigenvalue using the power iteration method.
-
-## Requirements
-
-- C compiler
-- Standard C libraries (stdio.h, stdlib.h, math.h, time.h)
-
-## Example
-
-```bash
-Eigenvalue Calculator
-
-1. Enter matrix manually
-2. Generate random matrix
-Enter your choice: 2
-Enter the number of rows: 3
-Enter the number of columns: 3
-
-The matrix is:
-0.621720 0.679952 0.985775
-0.519720 0.151520 0.335464
-0.819637 0.303816 0.505522
-
-Dominant Eigenvalue: 1.709209
+The input data should be in CSV format with the last column containing the class labels. Each row represents a data point, where the first `n_in` columns are the features and the last column is the class label. For example:
 ```
+x1,x2,x3,x4,x5,x6,y
+1,2,3,4,5,6,0
+7,8,9,10,11,12,1
+...
+```
+
+## Parameters
+
+- `learning_rate`: The learning rate determines the step size taken during optimization.
+- `n_epochs`: The number of epochs defines how many times the algorithm will iterate over the entire dataset during training.
+- `n_in`: The number of input features in the dataset.
+- `n_out`: The number of output classes (2 for binary classification).
+
+## Output
+
+The code outputs the accuracy of the model on the training dataset for each epoch. The accuracy is calculated as the percentage of correctly predicted labels.
+
+## Implementation Details
+
+- The `LR` struct represents the logistic regression model, containing the weights `W` and biases `b`.
+- The `LR_construct` function initializes the model with random weights and biases.
+- The `LR_train` function performs gradient descent to update the weights and biases based on the training data.
+- The `LR_predict` function predicts the class label for a given input using the trained model.
+- The `LR_softmax` function applies the softmax activation function to convert model outputs into class probabilities.
+
+## License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
 ---
 ## Made by 
