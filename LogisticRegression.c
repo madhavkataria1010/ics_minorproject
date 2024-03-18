@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h> 
+#include <string.h>
+#include <time.h>
 
+//Here Defining the structure of Logistic Regression
 typedef struct {
     int N;
     int n_in;
@@ -11,14 +13,14 @@ typedef struct {
     double *b;
 } LR;
 
-
+//Function Prototypes
 void LR_construct(LR *this, int N, int n_in, int n_out);
 void LR_destruct(LR *this);
 void LR_train(LR *this, int *x, int *y, double lr);
 void LR_softmax(LR *this, double *x);
 void LR_predict(LR *this, int *x, double *y);
 
-
+// Making the model 
 void LR_construct(LR *this, int N, int n_in, int n_out) {
     int i, j;
     this->N = N;
@@ -30,20 +32,24 @@ void LR_construct(LR *this, int N, int n_in, int n_out) {
     for(i=0; i<n_out; i++) this->W[i] = this->W[0] + i * n_in;
     this->b = (double *)malloc(sizeof(double) * n_out);
 
+    // Initialize weights and biases randomly
+    srand(time(NULL));
     for(i=0; i<n_out; i++) {
         for(j=0; j<n_in; j++) {
-            this->W[i][j] = 0;
+            this->W[i][j] = (double)rand() / RAND_MAX;
         }
-        this->b[i] = 0;
+        this->b[i] = (double)rand() / RAND_MAX;
     }
 }
 
+//Freeing up the memory 
 void LR_destruct(LR *this) {
     free(this->W[0]);
     free(this->W);
     free(this->b);
 }
 
+//Function to train the model 
 void LR_train(LR *this, int *x, int *y, double lr) {
     int i, j;
     double *p_y_given_x = (double *)malloc(sizeof(double) * this->n_out);
@@ -72,6 +78,7 @@ void LR_train(LR *this, int *x, int *y, double lr) {
     free(dy);
 }
 
+// Soft Max Function
 void LR_softmax(LR *this, double *x) {
     int i;
     double max = 0.0;
@@ -90,6 +97,7 @@ void LR_softmax(LR *this, double *x) {
     }
 }
 
+// Prediction of the output 
 void LR_predict(LR *this, int *x, double *y) {
     int i, j;
 
@@ -104,9 +112,30 @@ void LR_predict(LR *this, int *x, double *y) {
     LR_softmax(this, y);
 }
 
+// This is just for debuging and reset of the stuff please ignore it 
+void shuffle_data(int **train_X, int **train_Y, int train_N, int n_in, int n_out) {
+    int i, j, temp;
+    for (i = 0; i < train_N; i++) {
+        int rand_index = rand() % train_N;
+        // Swap train_X[i] and train_X[rand_index]
+        for (j = 0; j < n_in; j++) {
+            temp = train_X[i][j];
+            train_X[i][j] = train_X[rand_index][j];
+            train_X[rand_index][j] = temp;
+        }
+        // Swap train_Y[i] and train_Y[rand_index]
+        for (j = 0; j < n_out; j++) {
+            temp = train_Y[i][j];
+            train_Y[i][j] = train_Y[rand_index][j];
+            train_Y[rand_index][j] = temp;
+        }
+    }
+}
+
+// defining the test dataset and training the model
 void test_lr(void) {
     int i, j, epoch;
-    double learning_rate = 0.1;
+    double learning_rate = 0.01;
     int n_epochs = 250;
     int n_in = 6;  
     int n_out = 2; 
@@ -165,7 +194,8 @@ void test_lr(void) {
 
     int correct_predictions = 0;
 
-   for(epoch=0; epoch<n_epochs; epoch++) {
+    for(epoch=0; epoch<n_epochs; epoch++) {
+        shuffle_data(train_X, train_Y, train_N, n_in, n_out);
         correct_predictions = 0;
         for(i=0; i<train_N; i++) {
             LR_train(&classifier, train_X[i], train_Y[i], learning_rate);
@@ -194,6 +224,9 @@ void test_lr(void) {
         }
         double accuracy = (double)correct_predictions / train_N * 100.0;
         printf("Epoch %d, Accuracy: %.2f%%\n", epoch+1, accuracy);
+        //just for debuging 
+        printf("Epoch %d, Correct Predictions: %d\n", epoch+1, correct_predictions);
+        printf("Epoch %d, Total Examples: %d\n", epoch+1, train_N);
     }
     
     
@@ -210,8 +243,8 @@ void test_lr(void) {
     
 }
 
+//  Main Function
 int main(void) {
     test_lr();
     return 0;
 }
-
