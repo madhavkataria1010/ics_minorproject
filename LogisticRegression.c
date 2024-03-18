@@ -77,7 +77,10 @@ void LR_train(LR *this, int *x, int *y, double lr) {
     free(p_y_given_x);
     free(dy);
 }
-
+// Logistic Regression equation:
+// Given input features x = (x1, x2, ..., xn),
+// the output y is computed as:
+// y = softmax(W * x + b)
 // Soft Max Function
 void LR_softmax(LR *this, double *x) {
     int i;
